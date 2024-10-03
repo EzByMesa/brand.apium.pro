@@ -9,8 +9,12 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { createPinia } from "pinia";
 import router from "@/router/index.js";
+import { themes } from "@/plugins/themes.js"
 
 const vuetify = createVuetify({
+    theme: {
+        themes: themes
+    },
     defaults: {
         VSheet: {
             color: 'transparent'

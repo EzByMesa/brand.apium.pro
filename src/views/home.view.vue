@@ -1,7 +1,7 @@
 <template>
   <v-sheet class="d-flex justify-space-around" width="80%" height="50%">
     <v-sheet color="transparent" class="pa-5 mb-5 mx-5">
-      <v-sheet width="100" height="10" class="mb-2" :color="p.burnt_sienna.color" />
+      <v-sheet width="100" height="10" class="mb-2 mt-10" :color="p.burnt_sienna.color" />
       <p>Apium colors</p>
       <p>While embracing a much more colorful language in our brand communications,<br>Apium Apple is our resting color, used whenever Apium needs to be recognizable.</p>
 
@@ -25,26 +25,89 @@
           </v-sheet>
         </v-col>
       </v-row>
-      <v-sheet class="subtitle text-center py-10">powered by <v-chip density="compact" variant="flat" color="#f1b055" href="https://apium.pro">APIUM</v-chip></v-sheet>
+
+      <v-sheet width="100" height="10" class="mb-2 mt-10" :color="p.sandy_brown.color" />
+      <p>Face of APIUM</p>
+
+      <v-divider class="my-5" color="transparent" />
+
+      <v-row>
+        <v-col v-for="image in Object.keys(l)" :key="image">
+          <v-sheet class="text-center">
+            <v-img :height="l[image].size.h" :width="l[image].size.w" :src="l[image].uri" size="130" rounded/><br>
+            <v-chip size="large" variant="text">{{ l[image].name }}</v-chip><br>
+          </v-sheet>
+        </v-col>
+      </v-row>
+
+      <v-sheet width="100" height="10" class="mb-2 mt-10" :color="p.grain_brown.color" />
+      <v-sheet class="subtitle">powered by APIUM</v-sheet>
     </v-sheet>
   </v-sheet>
+
+  <v-avatar
+      variant="flat"
+      :color="theme === 'light' ? p.burnt_sienna.color : p.apium_apple.color"
+      size="40"
+      v-on:click="toggleTheme"
+      style="position: fixed; bottom: 10px; left: 10px; cursor: pointer"
+  >
+    <v-icon :icon="['fas', themes[theme].icon]" />
+  </v-avatar>
 </template>
 
 <script>
-import { Access } from "../store/access.js";
+
+import {themeStore} from "@/store/theme.store.js";
+import {themes} from "@/plugins/themes.js";
 
 export default {
   name: "HomeView",
   data() {
     return {
+      l: {
+
+        big_light: {
+          name: 'MAIN LOGO',
+          uri: 'https://00.apium.pro/img/logo/light_logo_big.png',
+          size: {
+            w: 400,
+            h: 200
+          }
+        },
+        big_dark: {
+          name: 'MAIN LOGO',
+          uri: 'https://00.apium.pro/img/logo/dark_logo_big.png',
+          size: {
+            w: 400,
+            h: 200
+          }
+        },
+        colored: {
+          name: 'Colorless logo',
+          uri: 'https://00.apium.pro/img/logo/logo_colored.svg',
+          size: {
+            w: 200,
+            h: 200
+          }
+        },
+        favicon: {
+          name: 'Favicon',
+          uri: 'https://00.apium.pro/img/logo/favicon.svg',
+          size: {
+            w: 200,
+            h: 200
+          }
+        }
+      },
       p: {
         apium_apple: {
           name: 'Apium Apple',
           color: '#699170',
           rgb: '105 \\ 145 \\ 112'
         },
-        rainee: {
-          name: 'Rainee',
+        newbie_mint: {
+          name: 'Newbie Mint',
           color: '#b4c0a5',
           rgb: '180 \\ 192 \\ 165'
         },
@@ -67,60 +130,27 @@ export default {
     }
   },
   methods: {
-    input_symbol: function () {
-      let id = event.srcElement.id
-
-      if (this.access) {
-        switch (id) {
-          case '178_8':
-            this.selected_wave = 0
-            break;
-          case '47_7':
-            this.selected_wave = 1
-            break;
-          case '142_2':
-            this.selected_wave = 2
-            break;
-          case '143_3':
-            this.selected_wave = 3
-            break;
-          case '47_0':
-            this.access = false
-            this.code_str = []
-            break
-        }
-      } else {
-        if (this.code_str.length < 4) {
-          this.code_str.push(id)
-        }
-
-        if (this.code_str.length === 4) {
-          if (this.code_str.toString() === this.code.toString()) {
-            this.access = true
-            this.$router.push({name: 'synth'})
-          }
-          this.code_str = []
-        }
+    toggleTheme: function () {
+      if (this.theme === 'light') {
+        this.theme = 'dark'
+      } else if (this.theme === 'dark') {
+        this.theme = 'light'
       }
-    },
-    get_element: function (str) {
-      switch (str.length) {
-        case 3: return str
-        case 2: return '0' + str
-        case 1: return '00' + str
-        default: return 'XXX'
-      }
+      this.$vuetify.theme.global.name = this.theme
     }
   },
   computed: {
-    access: {
+    themes() {
+      return themes
+    },
+    theme: {
       get() {
-        return Access().get()
+        return themeStore().get()
       },
-      set(v) {
-        Access().set(v)
+      set(value) {
+        themeStore().set(value)
       }
-    }
+    },
   }
 }
 </script>
