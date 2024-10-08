@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/home.view.vue'
+import ColorPickerView from '@/views/c.view.vue'
 
 
 const routes = [
@@ -7,7 +8,12 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
-  }
+  },
+  {
+    path: '/c/:color',
+    name: 'color',
+    component: ColorPickerView
+  },
 ]
 
 const router = createRouter({

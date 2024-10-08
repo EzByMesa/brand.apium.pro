@@ -11,6 +11,7 @@ import { createPinia } from "pinia";
 import router from "@/router/index.js";
 import { themes } from "@/plugins/themes.js"
 
+
 const vuetify = createVuetify({
     theme: {
         themes: themes
