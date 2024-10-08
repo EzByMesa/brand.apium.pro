@@ -8,9 +8,9 @@
       <v-hover>
         <template v-slot:default="{ isHovering, props }">
           <v-sheet class="d-flex justify-center align-center flex-column" width="100%" height="100%">
-            <v-sheet v-bind="props" rounded="pill">
+            <v-sheet v-bind="props" rounded="pill" v-on:click="open_color(p[color].color)" >
               <v-fade-transition>
-                <v-avatar v-on:click="open_color(p[color].color)" :size="p[color].primary ? 300 : 200" :color="p[color].color+'dd'" style="position: absolute; z-index: 3000; cursor: pointer" v-if="isHovering">
+                <v-avatar :size="p[color].primary ? 300 : 200" :color="p[color].color+'dd'" style="position: absolute; z-index: 3000; cursor: pointer" v-if="isHovering">
                   <v-icon style="font-size: 30px" :icon="['fas', 'clone']" />
                 </v-avatar>
               </v-fade-transition>

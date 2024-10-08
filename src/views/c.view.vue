@@ -1,6 +1,6 @@
 <template>
 
-  <v-sheet style="position: fixed; top: 0; left: 0; z-index: 0; cursor: pointer" :color="color" width="100%" height="100%" v-on:click="get_random()">
+  <v-sheet style="position: fixed; top: 0; left: 0; z-index: 0; cursor: pointer" :color="color" width="100%" height="100%" class="d-flex justify-center align-center" v-on:click="get_random()">
     <v-img :src="frog" v-if="hypno" style="mix-blend-mode: screen;" class="pulse" />
   </v-sheet>
   <v-sheet color="transparent" width="300" class="px-3 pt-3 rounded-t-lg rounded-b-0" style="position: fixed; bottom: 0; left: calc(50% - 150px)">
