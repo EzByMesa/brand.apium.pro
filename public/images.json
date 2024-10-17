@@ -1,0 +1,38 @@
+[
+  {
+    "id": "big_light",
+    "name": "LOGO (LIGHT THEME)",
+    "uri": "https://00.apium.pro/img/logo/light_logo_big.png",
+    "size": {
+      "w": 400,
+      "h": 200
+    }
+  },
+  {
+    "id": "big_dark",
+    "name": "LOGO (DARK THEME)",
+    "uri": "https://00.apium.pro/img/logo/dark_logo_big.png",
+    "size": {
+      "w": 400,
+      "h": 200
+    }
+  },
+  {
+    "id": "colored",
+    "name": "LOGO (ISOMETRIC)",
+    "uri": "https://00.apium.pro/img/logo/logo_colored.svg",
+    "size": {
+      "w": 200,
+      "h": 200
+    }
+  },
+  {
+    "id": "favicon",
+    "name": "ICON",
+    "uri": "https://00.apium.pro/img/logo/favicon.svg",
+    "size": {
+      "w": 200,
+      "h": 200
+    }
+  }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "id": "total_black",
+    "name": "Apium Media\nBRANDBOOK",
+    "primary": false,
+    "color": "#000000",
+    "rgb": {
+      "r": 0,
+      "g": 0,
+      "b": 0
+    }
+  },
+  {
+    "id": "apple_mint",
+    "name": "Apple Mint",
+    "primary": false,
+    "color": "#699170",
+    "rgb": {
+      "r": 105,
+      "g": 145,
+      "b": 112
+    }
+  },
+  {
+    "id": "frozen_mint",
+    "name": "Frozen Mint",
+    "primary": false,
+    "color": "#b4c0a5",
+    "rgb": {
+      "r": 180,
+      "g": 192,
+      "b": 165
+    }
+  },
+  {
+    "id": "grian_brown",
+    "name": "Grain Brown",
+    "primary": false,
+    "color": "#e0d1ae",
+    "rgb": {
+      "r": 224,
+      "g": 209,
+      "b": 174
+    }
+  },
+  {
+    "id": "goose_steps",
+    "name": "Goose Steps",
+    "primary": true,
+    "color": "#f1b055",
+    "rgb": {
+      "r": 241,
+      "g": 176,
+      "b": 85
+    }
+  },
+  {
+    "id": "burnt_sienna",
+    "name": "Burnt Sienna",
+    "primary": false,
+    "color": "#e8663b",
+    "rgb": {
+      "r": 232,
+      "g": 102,
+      "b": 59
+    }
+  },
+  {
+    "id": "images",
+    "name": "FACE OF APIUM",
+    "primary": false,
+    "color": "#000000",
+    "rgb": {
+      "r": 0,
+      "g": 0,
+      "b": 0
+    }
+  }
+]

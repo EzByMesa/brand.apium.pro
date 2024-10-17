@@ -7,33 +7,53 @@ import * as directives from 'vuetify/directives'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
-import { createPinia } from "pinia";
-import router from "@/router/index.js";
-import { themes } from "@/plugins/themes.js"
+import { createPinia } from "pinia"
+import router from "@/router/index.js"
+
+init().then(null)
+
+async function init() {
+    const Vue = createApp(App)
+
+    await fetch(import.meta.env.BASE_URL + 'palette.json')
+        .then((response) => response.json())
+        .then((palette) => {
+            window.palette = palette
+            Vue.config.globalProperties.$palette = palette
+        })
+    await fetch(import.meta.env.BASE_URL + 'images.json')
+        .then((response) => response.json())
+        .then((images) => {
+            window.images = images
+            Vue.config.globalProperties.$images = images
+        })
 
 
-const vuetify = createVuetify({
-    theme: {
-        themes: themes
-    },
-    defaults: {
-        VSheet: {
-            color: 'transparent'
+    const vuetify = createVuetify({
+        defaults: {
+            VSheet: {
+                color: 'transparent'
+            },
+            VChip: {
+                variant: 'text'
+            }
         },
-        VChip: {
-            variant: 'text'
-        }
-    },
-    components,
-    directives
-})
+        components,
+        directives
+    })
 
-library.add(fas)
-const pinia = createPinia()
+    library.add(fas)
+    const pinia = createPinia()
 
-const Vue = createApp(App)
-Vue.use(router)
-Vue.use(vuetify)
-Vue.use(pinia)
-Vue.component('v-icon', FontAwesomeIcon)
-Vue.mount('#app')
+
+    Vue.use(router)
+    Vue.use(vuetify)
+    Vue.use(pinia)
+    Vue.component('v-icon', FontAwesomeIcon)
+
+
+    Vue.mount('#app')
+}
+
+
+
