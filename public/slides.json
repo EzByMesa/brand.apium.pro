@@ -1,7 +1,9 @@
 [
   {
     "id": "total_black",
-    "name": "Apium Media\nBRANDBOOK",
+    "type": "title",
+    "name": "BRANDBOOK",
+    "text": "APIUM MEDIA",
     "primary": false,
     "color": "#000000",
     "rgb": {
@@ -12,6 +14,7 @@
   },
   {
     "id": "apple_mint",
+    "type": "color",
     "name": "Apple Mint",
     "primary": false,
     "color": "#699170",
@@ -23,6 +26,7 @@
   },
   {
     "id": "frozen_mint",
+    "type": "color",
     "name": "Frozen Mint",
     "primary": false,
     "color": "#b4c0a5",
@@ -34,6 +38,7 @@
   },
   {
     "id": "grian_brown",
+    "type": "color",
     "name": "Grain Brown",
     "primary": false,
     "color": "#e0d1ae",
@@ -45,6 +50,7 @@
   },
   {
     "id": "goose_steps",
+    "type": "color",
     "name": "Goose Steps",
     "primary": true,
     "color": "#f1b055",
@@ -56,6 +62,7 @@
   },
   {
     "id": "burnt_sienna",
+    "type": "color",
     "name": "Burnt Sienna",
     "primary": false,
     "color": "#e8663b",
@@ -67,13 +74,50 @@
   },
   {
     "id": "images",
-    "name": "FACE OF APIUM",
+    "type": "text",
+    "title": "FACE OF APIUM",
+    "subtitle": "HOWS U SEE US",
     "primary": false,
-    "color": "#000000",
+    "color": "#ffffff",
     "rgb": {
-      "r": 0,
-      "g": 0,
-      "b": 0
+      "r": 255,
+      "g": 255,
+      "b": 255
     }
+  },
+  {
+    "id": "image_one",
+    "type": "image",
+    "url": "https://00.apium.pro/img/logo/light_logo_big.png",
+    "title": "LIGHT APIUM LOGO",
+    "subtitle": "USED ON LIGHT BACKGROUND COLORS",
+    "secondary": "#b4c0a5",
+    "primary": false,
+    "color": "#e0d1ae",
+    "s": {
+      "w": 500,
+      "h": 500
+    }
+  },
+  {
+    "id": "image_two",
+    "type": "image",
+    "url": "https://00.apium.pro/img/logo/dark_logo_big.png",
+    "title": "DARK APIUM LOGO",
+    "subtitle": "USED ON DARKISH BACKGROUND COLORS",
+    "secondary": "#dadada",
+    "primary": false,
+    "color": "#141920",
+    "s": {
+      "w": 500,
+      "h": 500
+    }
+  },
+  {
+    "id": "to_colorpicker",
+    "type": "url",
+    "url": "/c/000000",
+    "name": "COLORPICKER",
+    "color": "#000000"
   }
 ]

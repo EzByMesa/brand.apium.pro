@@ -1,21 +1,28 @@
 <template>
-  <v-sheet v-on:wheel="scrollEvent" style="position: fixed; height: 100%; width: 100%; top: 0; left: 0; overflow: auto" id="home_area">
+  <v-sheet style="position: fixed; height: 100%; width: 100%; top: 0; left: 0; overflow: auto" id="home_area" v-on:scroll="scrollEvent" v-on:wheel="scrollingEvent">
     <v-sheet :style="`background: ${gradient}`" width="100%" :height="height">
-      <v-sheet style="position: fixed; bottom: 0; width: 100%; line-height: 0.71; font-size: 10vh; color: white !important; text-align: left">
-        {{ color.name }}
-      </v-sheet>
-
-
-      <v-sheet style="position: fixed; top: 50px; right: 50px; opacity: 0.5; color: white !important; font-size: 14vh; text-align: right" v-if="step !== 0">
-        {{ color.color }}
-        <br>
-        {{ color.rgb.r }} {{color.rgb.g}} {{color.rgb.b}}
-      </v-sheet>
-
-      <v-sheet class="scrollize" style="position: fixed; bottom: 0; right: 0; color: white !important; text-align: center" width="100" v-if="step !== this.palette.length-1">
-        SCROLL <v-icon :icon="['fas', 'arrow-down']" />
-      </v-sheet>
+      <v-fade-transition>
+        <v-sheet v-if="slide.type === 'title'" >
+          <a-title :meta="slide" />
+        </v-sheet>
+        <v-sheet v-if="slide.type === 'color'" >
+          <a-color :meta="slide" />
+        </v-sheet>
+        <v-sheet v-if="slide.type === 'text'" >
+          <a-text :meta="slide" />
+        </v-sheet>
+        <v-sheet v-if="slide.type === 'image'" >
+          <a-image :meta="slide" />
+        </v-sheet>
+        <v-sheet v-if="slide.type === 'url'" >
+          <a-url :meta="slide" />
+        </v-sheet>
+      </v-fade-transition>
     </v-sheet>
+  </v-sheet>
+
+  <v-sheet style="position: fixed; top: 0; z-index: 3000;" color="red" v-if="false">
+    {{ scrolling }}
   </v-sheet>
 
 
@@ -69,14 +76,24 @@
 
 <script>
 
+import ATitle from "@/components/slides/title.slide.vue";
+import AColor from "@/components/slides/color.slide.vue";
+import AText from "@/components/slides/text.slide.vue";
+import AImage from "@/components/slides/image.slide.vue";
+import AUrl from "@/components/slides/url.slide.vue";
+import {Position, Scrolling, Timer} from "@/store/scroll.store.js";
+
 export default {
   name: "HomeView",
-  data() {
-    return {
-      scroll: 0
-    }
-  },
+  components: {AUrl, AImage, AText, AColor, ATitle },
   methods: {
+    scrollingEvent: function () {
+      this.scrolling = true
+      this.timer = setTimeout(() => {
+        this.scrolling = false
+        window.clearTimeout(this.timer)
+      }, 100)
+    },
     scrollEvent: function () {
       this.scroll = document.getElementById('home_area').scrollTop
     },
@@ -85,31 +102,31 @@ export default {
     }
   },
   computed: {
-    palette() {
-      return this.$palette
+    slides() {
+      return this.$slides
     },
     step() {
-      let step = this.height / this.$palette.length
+      let step = this.height / this.$slides.length
       let scroll = this.scroll
       let pos = 0
       let offset = window.screen.availHeight / 2
-      for (let i = 0; i < this.$palette.length; i++) {
+      for (let i = 0; i < this.$slides.length; i++) {
         if (scroll >= step * i - offset && scroll <= step * i + step - offset) {
           pos = i
         }
       }
       return pos
     },
-    color() {
-      return this.$palette[this.step]
+    slide() {
+      return this.$slides[this.step]
     },
     height() {
-      return window.screen.availHeight * this.$palette.length
+      return window.screen.availHeight * this.$slides.length
     },
     gradient() {
       let points = []
-      let step = 100 / this.$palette.length
-      for (let [index, el] of this.$palette.entries()) {
+      let step = 100 / this.$slides.length
+      for (let [index, el] of this.$slides.entries()) {
         points.push({
           start: step * index + 0.5,
           finish: step * index + step-0.5,
@@ -122,58 +139,35 @@ export default {
       }
       gradient += ');'
       return gradient
+    },
+    scroll: {
+      get() {
+        return Position().get()
+      },
+      set(v) {
+        Position().set(v)
+      }
+    },
+    scrolling: {
+      get() {
+        return Scrolling().get()
+      },
+      set(v) {
+        Scrolling().set(v)
+      }
+    },
+    timer: {
+      get() {
+        return Timer().get()
+      },
+      set(v) {
+        Timer().set(v)
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-.scrollize {
-  animation: myAnim 5s cubic-bezier(0.7, 0, 0.84, 0) 0s infinite none;
-}
-@keyframes myAnim {
-  0% {
-    animation-timing-function: ease-in;
-    opacity: 0;
-    transform: translateY(-45px);
-  }
 
-  24% {
-    opacity: 1;
-  }
-
-  40% {
-    animation-timing-function: ease-in;
-    transform: translateY(-24px);
-  }
-
-  65% {
-    animation-timing-function: ease-in;
-    transform: translateY(-12px);
-  }
-
-  82% {
-    animation-timing-function: ease-in;
-    transform: translateY(-6px);
-  }
-
-  93% {
-    animation-timing-function: ease-in;
-    transform: translateY(-4px);
-  }
-
-  25%,
-  55%,
-  75%,
-  87% {
-    animation-timing-function: ease-out;
-    transform: translateY(0px);
-  }
-
-  100% {
-    animation-timing-function: ease-out;
-    opacity: 0;
-    transform: translateY(0px);
-  }
-}
 </style>

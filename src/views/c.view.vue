@@ -36,6 +36,7 @@
         </v-sheet>
       </v-tooltip>
     </v-btn>
+    <v-btn block v-on:click="go_home()" rounded="0">HOME</v-btn>
     </v-sheet>
 </template>
 
@@ -86,6 +87,9 @@ export default {
     }
   },
   methods: {
+    go_home: function () {
+      window.location.href = "/"
+    },
     toggle_hypno: function () {
       if (this.hypno) {
         this.music.currentTime = 0

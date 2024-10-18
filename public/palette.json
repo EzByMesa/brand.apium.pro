@@ -1,16 +1,5 @@
 [
   {
-    "id": "total_black",
-    "name": "Apium Media\nBRANDBOOK",
-    "primary": false,
-    "color": "#000000",
-    "rgb": {
-      "r": 0,
-      "g": 0,
-      "b": 0
-    }
-  },
-  {
     "id": "apple_mint",
     "name": "Apple Mint",
     "primary": false,
@@ -63,17 +52,6 @@
       "r": 232,
       "g": 102,
       "b": 59
-    }
-  },
-  {
-    "id": "images",
-    "name": "FACE OF APIUM",
-    "primary": false,
-    "color": "#000000",
-    "rgb": {
-      "r": 0,
-      "g": 0,
-      "b": 0
     }
   }
 ]

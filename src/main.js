@@ -27,6 +27,12 @@ async function init() {
             window.images = images
             Vue.config.globalProperties.$images = images
         })
+    await fetch(import.meta.env.BASE_URL + 'slides.json')
+        .then((response) => response.json())
+        .then((slides) => {
+            window.slides = slides
+            Vue.config.globalProperties.$slides = slides
+        })
 
 
     const vuetify = createVuetify({
